@@ -1,0 +1,36 @@
+# Canna
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+      target: dev
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/api/xdebug.ini:/etc/php7/conf.d/xdebug.ini
+    environment:
+      - APP_ENV=local
+    ports:
+      - 10080:80
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=sample_laravel
+      - TZ=Asia/Tokyo
+    ports:
+      - 10306:3306
+
+  redis:
+    image: redis:5.0
+    ports:
+      - 16379:6379
