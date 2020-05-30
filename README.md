@@ -1,0 +1,2 @@
+# sample-lighthouse_and_auth0
+LaravelのLighthouseとAuth0の練習用リポジトリ
