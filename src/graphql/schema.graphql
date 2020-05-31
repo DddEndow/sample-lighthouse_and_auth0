@@ -18,6 +18,7 @@ type Mutation {
     createUserByInputType(input: CreateUserInput! @spread): User! @create
     updateUser(id: ID!, name: String, email: String): User @update
     updateUserByInputType(id: ID!, input: UpdateUserInput @spread): User @update
+    upsertUser(id: ID!, name: String!, email: String!, password: String!): User @upsert
 }
 
 type User {
