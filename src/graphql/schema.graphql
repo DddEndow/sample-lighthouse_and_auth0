@@ -16,6 +16,8 @@ type Query {
 type Mutation {
     createUser(name: String!, email: String!, password: String!): User! @create
     createUserByInputType(input: CreateUserInput! @spread): User! @create
+    updateUser(id: ID!, name: String, email: String): User @update
+    updateUserByInputType(id: ID!, input: UpdateUserInput @spread): User @update
 }
 
 type User {
@@ -30,4 +32,10 @@ input CreateUserInput {
     name: String!
     email: String!
     password: String!
+}
+
+input UpdateUserInput {
+    name: String
+    email: String
+    password: String
 }
