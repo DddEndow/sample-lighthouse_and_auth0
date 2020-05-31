@@ -10,6 +10,7 @@ scalar DateTimeTz @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Da
 type Query {
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
+    user_all: [User!]! @all
 }
 
 type User {
@@ -19,3 +20,4 @@ type User {
     created_at: DateTime!
     updated_at: DateTime!
 }
+
