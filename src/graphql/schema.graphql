@@ -15,6 +15,7 @@ type Query {
 
 type Mutation {
     createUser(name: String!, email: String!, password: String!): User! @create
+    createUserByInputType(input: CreateUserInput! @spread): User! @create
 }
 
 type User {
@@ -25,3 +26,8 @@ type User {
     updated_at: DateTime!
 }
 
+input CreateUserInput {
+    name: String!
+    email: String!
+    password: String!
+}
