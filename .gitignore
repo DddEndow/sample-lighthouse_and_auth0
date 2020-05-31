@@ -38,3 +38,6 @@ Homestead.json
 
 # inteliJ
 .idea/
+
+/src/schema-directives.graphql
+/src/_lighthouse_ide_helper.php
