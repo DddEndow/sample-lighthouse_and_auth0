@@ -27,3 +27,10 @@ Route::get('/public', function (Request $request) {
 Route::get('/private', function (Request $request) {
     return response()->json(["message" => "プライベートなエンドポイントへようこそ！これを表示するには有効なアクセストークンが必要です。"]);
 })->middleware('jwt');
+
+// このエンドポイントの認証には"read:messages"スコープを持つアクセストークンが必要です
+Route::get('/private-scoped', function (Request $request) {
+    return response()->json([
+        "message" => "プライベートなエンドポイントへようこそ！これを表示するには有効なアクセストークンとread:messagesのスコープが必要です。"
+    ]);
+})->middleware('check.scope:read:messages');
