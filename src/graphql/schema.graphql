@@ -20,6 +20,9 @@ type Mutation {
     updateUserByInputType(id: ID!, input: UpdateUserInput @spread): User @update
     upsertUser(id: ID!, name: String!, email: String!, password: String!): User @upsert
     deleteUser(id: ID!): User @delete
+
+    createPost(input: CreatePostInput! @spread): Post @create
+    updatePost(input: UpdatePostInput! @spread): Post @update @broadcast(subscription: "postUpdated")
 }
 
 type Subsctiption {
@@ -54,4 +57,22 @@ input UpdateUserInput {
     name: String
     email: String
     password: String
+}
+
+input CreatePostInput {
+    title: String!
+    content: String!
+    author: CreateAuthorRelation
+}
+
+input CreateAuthorRelation {
+    connect: ID
+    create: CreateUserInput
+    update: UpdateUserInput
+}
+
+input UpdatePostInput {
+    id: ID!
+    title: String
+    content: String
 }
