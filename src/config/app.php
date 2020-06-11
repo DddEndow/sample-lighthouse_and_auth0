@@ -175,6 +175,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        /*
+         * pusher-php
+         */
+        \Nuwave\Lighthouse\Subscriptions\SubscriptionServiceProvider::class,
     ],
 
     /*
