@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => '/pusher'], function () {
+    Route::get('/index', function () {
+        return view('pusher-index');
+    });
+
+    Route::get('/hello-world', function () {
+        event(new App\Events\MyEvent('hello world'));
+        return ['message' => 'send to message : hello world'];
+    });
+});
