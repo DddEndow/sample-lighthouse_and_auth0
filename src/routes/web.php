@@ -27,3 +27,9 @@ Route::group(['prefix' => '/pusher'], function () {
         return ['message' => 'send to message : hello world'];
     });
 });
+
+Route::group(['prefix' => '/realtime-chart'], function () {
+    Route::get('/', function () {
+        return view('realtime-chart');
+    });
+});
