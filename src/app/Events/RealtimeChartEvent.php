@@ -4,29 +4,39 @@
 namespace App\Events;
 
 
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
+use Pusher\Pusher;
 
-class RealtimeChartEvent implements ShouldBroadcast
+class RealtimeChartEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
-
-    public $value;
-
-    public function __construct($value)
+    public function __construct()
     {
-        $this->value = $value;
+        //
     }
 
-    public function broadcastOn()
+    public function run()
     {
-        return ['price-btcusd'];
-    }
+        $pusher = new Pusher(
+            config('const.pusher.app_key'),    // Replace with 'key' from dashboard
+            config('const.pusher.app_secret'), // Replace with 'secret' from dashboard
+            config('const.pusher.app_id'),     // Replace with 'app_id' from dashboard
+            array(
+                'cluster' => config('const.pusher.cluster') // Replace with 'cluster' from dashboard
+            )
+        );
 
-    public function broadcastAs()
-    {
-        return 'new-price';
+        $i = 0;
+
+        // Trigger a new random event every second. In your application,
+        // you should trigger the event based on real-world changes!
+        while (true) {
+            $pusher->trigger('price-btcusd', 'new-price', array(
+                'value' => rand(0, 5000)
+            ));
+
+            $i ++;
+            echo('send ' . $i . ' times' . PHP_EOL);
+
+            sleep(1);
+        }
     }
 }
