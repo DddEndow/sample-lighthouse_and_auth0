@@ -22,10 +22,11 @@ type Mutation {
     deleteUser(id: ID!): User @delete
 
     createPost(input: CreatePostInput! @spread): Post @create
-    updatePost(input: UpdatePostInput! @spread): Post @update @broadcast(subscription: "postUpdated")
+    updatePost(input: UpdatePostInput! @spread): Post @field(resolver: "App\\GraphQL\\Mutations\\PostResolver@updatePost")
+    updatePostSubscription(input: UpdatePostInput! @spread): Post @update @broadcast(subscription: "postUpdated")
 }
 
-type Subsctiption {
+type Subscription {
     postUpdated(author: ID): Post
 }
 
