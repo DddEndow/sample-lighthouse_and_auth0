@@ -11,6 +11,8 @@ type Query {
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
     user_all: [User!]! @all
+
+    animals: [Animal!]! @field(resolver: "App\\GraphQL\\Queries\\AnimalResolver@list")
 }
 
 type Mutation {
@@ -76,4 +78,26 @@ input UpdatePostInput {
     id: ID!
     title: String
     content: String
+}
+
+interface Animal {
+    id: ID!
+    name: String!
+}
+
+type Cat implements Animal {
+    id: ID!
+    name: String!
+    feed: String
+}
+
+type Dog implements Animal {
+    id: ID!
+    name: String!
+    favorite: [DogItem!]!
+}
+
+type DogItem {
+    id: ID!
+    name: String
 }
