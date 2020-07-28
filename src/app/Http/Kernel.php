@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt' => \App\Http\Middleware\CheckJWT::class,
         'check.scope' => \App\Http\Middleware\CheckScope::class,
+        'id_token' => \App\Http\Middleware\CheckIdToken::class,
     ];
 }

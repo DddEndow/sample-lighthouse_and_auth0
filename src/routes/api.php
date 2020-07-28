@@ -34,3 +34,11 @@ Route::get('/private-scoped', function (Request $request) {
         "message" => "プライベートなエンドポイントへようこそ！これを表示するには有効なアクセストークンとread:messagesのスコープが必要です。"
     ]);
 })->middleware('check.scope:read:messages');
+
+Route::get('/id-token/private', function (Request $request) {
+    return response()->json([
+        "message" => "ID Tokenの検証に成功しました。",
+        "auth0_user_id" => $request->auth0_user_id,
+        "email" => $request->email
+    ]);
+})->middleware('id_token');
