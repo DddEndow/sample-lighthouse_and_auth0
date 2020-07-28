@@ -13,6 +13,7 @@ type Query {
     user_all: [User!]! @all
 
     animals: [Animal!]! @field(resolver: "App\\GraphQL\\Queries\\AnimalResolver@list")
+    books: [Book!]! @field(resolver: "App\\GraphQL\\Queries\\BookResolver@list")
 }
 
 type Mutation {
@@ -100,4 +101,14 @@ type Dog implements Animal {
 type DogItem {
     id: ID!
     name: String
+}
+
+union Book = Novel | Comic
+
+type Novel {
+    novel_title: String!
+}
+
+type Comic {
+    comic_title: String!
 }
